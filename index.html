@@ -1,98 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>The Movie DB Catalog</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="./css/styles.css">
-  
-</head>
-<body>
-  <div class="page">
-    <header class="header is-inset-bottom-20 is-text-center" id="header">
-      <div class="is-40">
-        <img src="images/logo.svg" class="logo">
-        <span class="is-large white">The Movie Db</span>
-        <span class="is-font-weight-light white">Search</span>
-        <div class="is-append is-inset-20">
-          <input type="text" id="searchInput" name="search" placeholder="Search" class="is-search">
-          <button class="button is-yellow-btn" onclick="search()">Go</button>
+    <title>Hanyu Movie</title>
+  </head>
+  <body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hanyu Movie</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                <a class="nav-link active" href="#">Search Movie</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </header>
+    </nav>
 
-    <template id="heroTemplate">
-      <img class="hero-bg">
-    </template>
-
-    <main class="main is-inset-32">
-      <!-- Movie Details -->
-      <div id="movie"></div>
-      <template id="movieTemplate">
-        <div class="is-row">
-          <div class="is-col is-text-center is-30">
-            <img class="movie-poster" alt="Poster">
-          </div>
-          <div class="is-col is-70">
-            <h2 class="title"></h2>
-            <span class="movie-release-year is-muted"></span>
-
-            <h3 class="is-inset-top-20">Overview</h3>
-            <p class="is-large overview"></p>
-          </div>
+    <div class="container">
+        <div class="row mt-3 justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center">Search Movie</h1>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Movie title..." id="search-input">
+                    <button class="btn btn-dark" type="button" id="search-button">Search</button>
+                  </div>
+            </div>
         </div>
-      </template>
 
-      <div id="recommendations" class="is-row is-inset-top-32"></div>
-      <template id="recomendationsTemplate">
-        <div class="is-col item is-text-center is-20 is-inset-y-16">
-          <img class="movie-poster is-inset-bottom-12" alt="Poster"><br>
-          <span class="movie-title"></span>
+        <hr>
+
+        <div class="row" id="movie-list">
+            
         </div>
-      </template>
+    </div>
 
-      <!-- Movies List -->
-      <div id="title" class="is-inset-bottom-32 results"></div>
-      <template id="resultsTemplate">
-        <span class="results is-muted"></span>
-        <span class="label is-badge"></span>
-      </template>
-      <template id="titleTemplate">
-        <span class="title is-muted"></span>
-      </template>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Movie Detail</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
-      <table id="moviesTable" class="is-striped"></table>
-      <template id="movieListTemplate">
-        <tr class="item is-middle">
-          <td class="is-10 is-text-center">
-            <img class="movie-poster">
-            <img class="movie-background">
-          </td>
-          <td>
-            <span><b class="movie-title"></b></span><br>
-            <span class="movie-release-year is-muted"></span>
-          </td>
-        </tr>
-      </template>
+    <!-- Optional JavaScript; choose one of the two! -->
 
-      <div id="pager" class="is-inset-top-20 pager"></div>
-      <template id="pagerTemplate">
-        <button class="button"></button>
-      </template>
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> -->
 
-      <template id="list-template">
-        <li class="item">
-          <div class="item-title"></div>
-          <div class="item-body"></div>
-        </li>
-      </template>
-    </main>
-  </div>
-</body>
-
-<script src='./js/config.js'></script>
-<script src="./js/script.js"></script>
-
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+   
+  </body>
 </html>
